@@ -15,7 +15,7 @@ end
 
 function Player:update(dt)
   --|| Run the internal logic on the player. ||--
-  self:WASD(dt)
+  self:_WASD(dt)
 end
 
 
@@ -25,7 +25,7 @@ function Player:draw()
 end
 
 
-function Player:WASD(dt)
+function Player:_WASD(dt)
   --|| Runs the update method for WASD keys ||--
 
   local ux, uy = 0, 0
