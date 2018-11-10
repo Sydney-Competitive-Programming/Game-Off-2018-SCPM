@@ -5,36 +5,41 @@ Player = Object:extend()
 
 
 function Player:new()
-  -- Initialise the player --
+  --|| Initialise the player ||--
   self.image = love.graphics.newImage("assets/graphics/player.png")
   self.x = 100
   self.y = 100
-  self.vx = 100
-  self.vy = 100
+  self.speed = 100
 end
 
 
 function Player:update(dt)
-  -- Run the internal logic on the player. --
+  --|| Run the internal logic on the player. ||--
   self:WASD(dt)
 end
 
 
 function Player:draw()
-  -- Render the player --
+  --|| Render the player ||--
   love.graphics.draw(self.image, self.x, self.y)
 end
 
 
 function Player:WASD(dt)
-  -- Runs the update method for WASD keys --
-  if love.keyboard.isDown("w") then
-    self.y = self.y - self.vy*dt
-  elseif love.keyboard.isDown("a") then
-    self.x = self.x - self.vx*dt
-  elseif love.keyboard.isDown("s") then
-    self.y = self.y + self.vy*dt
-  elseif love.keyboard.isDown("d") then
-    self.x = self.x + self.vx*dt
+  --|| Runs the update method for WASD keys ||--
+
+  local ux, uy = 0, 0
+
+  if love.keyboard.isDown("w") then uy = uy-1 end
+  if love.keyboard.isDown("a") then ux = ux-1 end
+  if love.keyboard.isDown("s") then uy = uy+1 end
+  if love.keyboard.isDown("d") then ux = ux+1 end
+
+  if ux ~= 0 or uy ~= 0 then
+    local magnitude = math.sqrt(ux*ux + uy*uy)
+    ux, uy = ux/magnitude, uy/magnitude  -- Normalise the unit vector
   end
+
+  self.x = self.x + ux*self.speed*dt
+  self.y = self.y + uy*self.speed*dt
 end
