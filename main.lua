@@ -8,18 +8,18 @@ require("src/player")
 
 
 function love.load()
-  -- The master loading function --
-  player = Player()
+  --|| The master loading function ||--
+  player = Player(100, 100)
 end
 
 
 function love.update(dt)
-  -- The master update function --
+  --|| The master update function ||--
   player:update(dt)
 end
 
 
 function love.draw()
-  -- The master drawing function --
+  --|| The master drawing function ||--
   player:draw()
 end
