@@ -1,11 +1,11 @@
 
 function love.load()
     -- Load all required classes
-    Object = require "classic"
-    require "entity"
-    require "canvas"
-    require "example_player"
-    require "example_enemy"
+    Object = require "lib/classic"
+    require "src/entity"
+    require "src/canvas"
+    require "src/example_player"
+    require "src/example_enemy"
 
     -- Initiate game field
 

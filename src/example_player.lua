@@ -11,7 +11,7 @@ function Player:new(x,y,w,h,speed,acceleration, max_speed,canvas)
     
     -- MetaData
     self.name = "Player"
-    self.image = love.graphics.newImage("shipBeige_manned.png")
+    self.image = love.graphics.newImage("graphics/enemy_example.png")
     self.max_x = canvas.width
     self.max_y = canvas.height
 
