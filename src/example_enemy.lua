@@ -13,7 +13,7 @@ function Enemy:new(x,y,w,h,speed,canvas)
     self.scale_w = self.w/self.image:getWidth()
     self.scale_h = self.h/self.image:getHeight()
     self.speed =speed
-    self.motion_counter =0
+    
 end
 
 function Enemy:draw()
@@ -21,11 +21,8 @@ function Enemy:draw()
 end
 
 function Enemy:update(dt)
-    self.motion_counter = self.motion_counter +1;
-
-        speed = self.speed
-        distance = speed * dt 
-        self.move_down(self,dt,distance)
-        self.motion_counter =0
-
+    speed = self.speed
+    distance = speed * dt 
+    local ux, uy = 0, 1 -- Unit vector to move downward
+    self.move(self,ux,uy,distance)
 end

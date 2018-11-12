@@ -35,27 +35,31 @@ function Player:draw()
     love.graphics.draw(self.image,self.x ,self.y,0,self.scale_w,self.scale_h)
 end
 
-
 function Player:update(dt,duration_since_button_clicked)
-
+    
     -- Speed = Initial_speed + acceleration * time (how long a button is pressed)
     -- Distance = Speed * time (time between two consequent updates)
     
     speed = math.min(self.max_speed , self.speed +self.acceleration * duration_since_button_clicked)
     distance = speed * dt
 
-    if love.keyboard.isDown('right') then
-        Player.move_right(self,dt,distance)
+    -- Map motion direction into unit vectors (ux,uy)
+    local ux, uy = 0, 0
+    if love.keyboard.isDown("w") or love.keyboard.isDown('up') then
+        uy = uy-1
     end
-    if love.keyboard.isDown('down') then
-        Player.move_down(self,dt,distance)
+    if love.keyboard.isDown("a") or love.keyboard.isDown('left') then 
+        ux = ux-1 
     end
-    if love.keyboard.isDown('left') then
-        Player.move_left(self,dt,distance)
+    if love.keyboard.isDown("s") or love.keyboard.isDown('down') then
+        uy = uy+1
     end
-    if love.keyboard.isDown('up') then
-        Player.move_up(self,dt,distance)
+    
+    if love.keyboard.isDown("d") or love.keyboard.isDown('right') then
+        ux = ux+1
     end
+   
+    Player.move(self,ux,uy,distance)
 
     -- Ensure the player stays within the game field boundary
     if self.x < 0 then self.x = 0 end
