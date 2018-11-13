@@ -21,7 +21,7 @@ function Enemy:draw()
 end
 
 function Enemy:update(dt)
-    speed = self.speed
+    local speed = self.speed
     local distance = speed * dt 
     local ux, uy = 0, 1 -- Unit vector to move downward
     self.move(self,ux,uy,distance)
