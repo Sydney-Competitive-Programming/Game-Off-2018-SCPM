@@ -40,6 +40,7 @@ function Player:update(dt,duration_since_button_clicked)
     -- Speed = Initial_speed + acceleration * time (how long a button is pressed)
     -- Distance = Speed * time (time between two consequent updates)
     
+    -- Make sure not to exceed maximum speed
     speed = math.min(self.max_speed , self.speed +self.acceleration * duration_since_button_clicked)
     distance = speed * dt
 
