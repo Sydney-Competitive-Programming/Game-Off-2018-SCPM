@@ -54,7 +54,6 @@ function Player:update(dt,duration_since_button_clicked)
     if love.keyboard.isDown("s") or love.keyboard.isDown('down') then
         uy = uy+1
     end
-    
     if love.keyboard.isDown("d") or love.keyboard.isDown('right') then
         ux = ux+1
     end
