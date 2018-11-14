@@ -35,10 +35,10 @@ end
 
 -- Default update and draw functions
 function Entity:update()
-    love.graphics.polygon( "line", self.x, self.y+self.h, self.x+(self.w/2), self.y, self.x+self.w, self.y+self.h )
+    -- Place Holder --
 end
 
 
 function Entity:draw()
-    love.graphics.polygon( "line", self.x, self.y+self.h, self.x+(self.w/2), self.y, self.x+self.w, self.y+self.h )
+   -- Place Holder --
 end
