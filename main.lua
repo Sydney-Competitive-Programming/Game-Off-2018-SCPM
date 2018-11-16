@@ -6,6 +6,7 @@ function love.load()
     require "src/canvas"
     require "src/example_player"
     require "src/example_enemy"
+    require "src/map"
 
     -- Initiate game field
 
@@ -28,6 +29,7 @@ function love.load()
 end
 
 function love.update(frame_rate)
+    Game_field:update()
 
     if key_pressed then
         key_counter = key_counter +1;
@@ -39,6 +41,7 @@ function love.update(frame_rate)
 end
 
 function love.draw()
+    Game_field:draw()
     player:draw()
     enemy:draw()
 end

@@ -6,9 +6,6 @@
 -- TILESET --
 -------------
 
-TILE_WIDTH  = 32
-TILE_HEIGHT = 32
-
 TILESET = {
   love.graphics.newImage("graphics/tile_floor.png"),
   love.graphics.newImage("graphics/tile_wall.png")
@@ -21,7 +18,7 @@ TILESET = {
 N_WIDTH  = 8
 N_HEIGHT = 8
 
-ARENA_1 = {
+EXAMPLE_ARENA_1 = {
   {2, 2, 2, 2, 2, 2, 2, 2,},
   {2, 1, 1, 1, 1, 1, 1, 2,},
   {2, 1, 2, 1, 1, 2, 1, 2,},
@@ -38,10 +35,10 @@ ARENA_1 = {
 Map = Object:extend()
 
 
-function Map:new(tilemap, tile_width, tile_height)
+function Map:new(tilemap)
   --|| Initalises the game map ||--
   self.tilemap = tilemap
-  love.window.setMode(TILE_WIDTH*N_WIDTH, TILE_HEIGHT*N_HEIGHT)
+  self.tile_width, self.tile_height = TILESET[1]:getDimensions()
 end
 
 
@@ -53,10 +50,12 @@ end
 
 function Map:draw()
   --|| Draws the game map ||--
-  for y, y_val in ipairs(self.tilemap) do
-    for x, x_val in ipairs(y_val) do
+  for y, y_val in ipairs(self.tilemap) do  -- Iterate over rows
+    for x, x_val in ipairs(y_val) do  -- Iterate over each column in row
       local tile = TILESET[x_val]
-      love.graphics.draw(tile, (x-1)*TILE_WIDTH, (y-1)*TILE_HEIGHT)
+      love.graphics.draw(
+      tile, (x-1)*self.tile_width, (y-1)*self.tile_height
+      )
     end
   end
 end
