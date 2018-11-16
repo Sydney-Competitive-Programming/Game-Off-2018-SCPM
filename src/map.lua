@@ -10,8 +10,8 @@ TILE_WIDTH  = 32
 TILE_HEIGHT = 32
 
 TILESET = {
-  love.graphics.newImage("assets/graphics/tile_floor.png"),
-  love.graphics.newImage("assets/graphics/tile_wall.png")
+  love.graphics.newImage("graphics/tile_floor.png"),
+  love.graphics.newImage("graphics/tile_wall.png")
 }
 
 ------------------------
