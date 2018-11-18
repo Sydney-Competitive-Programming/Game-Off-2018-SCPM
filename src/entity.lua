@@ -20,26 +20,25 @@ function Entity:new(x,y,w,h)
 
 end
 
--- Motion functions where dt is the time lapse between consequent updates
-function Entity:move_left(dt, distance)
-    self.x = self.x- distance
-end
-function Entity:move_right(dt, distance)
-    self.x = self.x + distance
-end
-function Entity:move_up(dt, distance)
-    self.y = self.y- distance
-end
-function Entity:move_down(dt, distance)
-    self.y = self.y+ distance
+function Entity:move(ux,uy,displacement)
+    --|| Runs the update method for WASD keys ||--
+
+    if ux ~= 0 or uy ~= 0 then
+        local magnitude = math.sqrt(ux*ux + uy*uy)
+        ux, uy = ux/magnitude, uy/magnitude  -- Normalise the unit vector
+      end
+      
+    self.x = self.x + ux*displacement
+    self.y = self.y + uy*displacement
+
 end
 
 -- Default update and draw functions
 function Entity:update()
-    love.graphics.polygon( "line", self.x, self.y+self.h, self.x+(self.w/2), self.y, self.x+self.w, self.y+self.h )
+    -- Place Holder --
 end
 
 
 function Entity:draw()
-    love.graphics.polygon( "line", self.x, self.y+self.h, self.x+(self.w/2), self.y, self.x+self.w, self.y+self.h )
+   -- Place Holder --
 end
