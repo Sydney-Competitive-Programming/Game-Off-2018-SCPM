@@ -4,14 +4,16 @@
 Canvas = Object:extend()
 
 function Canvas:new()
-    self.width,self.height = love.graphics.getDimensions( )
+    self.width,self.height = love.graphics.getDimensions()
+    self.map = Map(EXAMPLE_ARENA_1, self.width, self.height)
+end
+
+
+function Canvas:update(dt)
+    self.map:update(dt)
 end
 
 
 function Canvas:draw()
-    -- To be implemented
-end
-
-function Canvas:update(dt)
-    -- To be implemented
+    self.map:draw()
 end
