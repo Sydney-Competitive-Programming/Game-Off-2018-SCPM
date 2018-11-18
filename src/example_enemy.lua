@@ -3,14 +3,12 @@
 
 Enemy = Entity:extend()
 
-function Enemy:new(x,y,w,h,speed,canvas)
+function Enemy:new(x,y,w,h,speed)
     Enemy.super.new(self, x,y,w,h )
     
     -- Metadata
     self.name = "Alien"
     self.image = love.graphics.newImage("graphics/player_example.png")
-    self.max_x = canvas.width
-    self.max_y = canvas.height
 
     -- The scale between the actual width and height of the player image and 
     -- The desired dimensions of the player entity

@@ -1,49 +1,35 @@
 
 function love.load()
-    -- Load all required classes
+
+    -- Load the class functions
     Object = require "lib/classic"
-    require "src/entity"
-    require "src/canvas"
-    require "src/example_player"
-    require "src/example_enemy"
-    require "src/map"
 
-    -- Initiate game field
+    -- Load the Game context
+    require("src/game_context")
+    Context = Game_Context()
 
-    Game_field = Canvas()
-
-    -- initiate player and an enemy
-    player = Player(
-        Game_field.width/2
-            ,Game_field.height
-            ,50,50,10,500,500,Game_field)
-
-    enemy = Enemy(
-        0,0
-        ,50,50,70,Game_field)
-
-    -- to measure the duration of any key being pressed
+    -- Initiate the keys constants (speed of players depends on how long a key is pressed)
     key_counter =0
     key_pressed =false
 
 end
 
 function love.update(frame_rate)
-    Game_field:update()
-
+    
     if key_pressed then
         key_counter = key_counter +1;
     end
 
-    player:update(frame_rate,key_counter*frame_rate)
-    enemy:update(frame_rate)
+    -- Updat the game context passing the time a key was pressed
+    Context:update(frame_rate,key_counter)
+    
 
 end
 
 function love.draw()
-    Game_field:draw()
-    player:draw()
-    enemy:draw()
+    
+    Context:draw()
+
 end
 
 -- Callback functions for key pressed
