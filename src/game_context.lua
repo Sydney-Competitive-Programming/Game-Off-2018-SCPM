@@ -7,11 +7,14 @@ Game_Context = Object:extend()
 
 -- Loads all required dependencies and initiates the game componentes
 function Game_Context:new()
-    
+    max_width,max_height = love.graphics.getDimensions()
+    -- initiate game map
+    require "src/map"
+    self.map =Map(EXAMPLE_ARENA_1, max_width, max_height)
+
     -- Initiate game field
     require "src/canvas"
-    require "src/map"
-    self.Game_field = Canvas()
+    self.Game_field = Canvas(max_width,max_height,self.map)
 
     
     -- initiate player and 
@@ -21,9 +24,10 @@ function Game_Context:new()
     
     -- initiate enemies
     require "src/example_enemy"
-    math.randomseed(os.time())
-    self.enemy_number =4
-    self.enemies={}
+    math.randomseed(os.time())  -- increase the randomness of the enemy position
+    self.enemy_number =4        -- This constant should come from level config file
+    self.enemies={}             -- an array containing the game enemies
+    self.enemy_counter =self.enemy_number -- counts how many enemies still alive
 
     for e =1,self.enemy_number do
         -- randomly choose a position for the enemy witihin 10%-90% of the width of the canvas
@@ -37,6 +41,7 @@ end
 function Game_Context:update(frame_rate , key_counter)
 
     self.Game_field:update()
+
     self.player:update(frame_rate,key_counter*frame_rate)
     
     for i,e in ipairs(self.enemies)do
@@ -46,10 +51,11 @@ function Game_Context:update(frame_rate , key_counter)
     -- Ensure the player stays within the game field boundary
     self.player:within_boundaries(self.Game_field.width,self.Game_field.height)
     
-    -- if an enemy gets out of the canvas box kill it
+    -- if an enemy gets out of the game field box kill it and reduce the enemy counter
     for i,e in ipairs(self.enemies) do
         if e:within_boundaries(self.Game_field.width,self.Game_field.height) ~= true then
             table.remove(self.enemies,i)
+            self.enemy_counter = self.enemy_counter-1
         end
     end
 end
