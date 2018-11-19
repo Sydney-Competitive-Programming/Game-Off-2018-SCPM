@@ -44,31 +44,13 @@ function Game_Context:update(frame_rate , key_counter)
     end
 
     -- Ensure the player stays within the game field boundary
-    if self.player.x < 0 then 
-        self.player.x = 0 
-    end
-    if (self.player.x+self.player.w) > self.Game_field.width then 
-        self.player.x = self.Game_field.width-self.player.w 
-    end
-    if self.player.y < 0 then 
-        self.player.y = 0 
-    end
+    self.player:within_boundaries(self.Game_field.width,self.Game_field.height)
     
-    if (self.player.y+self.player.h) > self.Game_field.height then
-        self.player.y = self.Game_field.height-self.player.h 
-    end
-
     -- if an enemy gets out of the canvas box kill it
     for i,e in ipairs(self.enemies) do
-        if e.x < 0 
-            or (e.x+e.w) > self.Game_field.width
-            or e.y < 0
-            or (e.y+e.h) > self.Game_field.height
-            then
-                table.remove(self.enemies,i)
-                --print(#self.enemies)
+        if e:within_boundaries(self.Game_field.width,self.Game_field.height) ~= true then
+            table.remove(self.enemies,i)
         end
-
     end
 end
 

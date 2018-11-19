@@ -60,3 +60,18 @@ function Player:update(dt,duration_since_button_clicked)
     Player.move(self,ux,uy,distance)
 
 end
+function Player:within_boundaries(max_x,max_y)
+    if self.x < 0 then 
+        self.x = 0 
+    end
+    if (self.x+self.w) > max_x then 
+        self.x = max_x-self.w 
+    end
+    if self.y < 0 then 
+        self.y = 0 
+    end
+    
+    if (self.y+self.h) > max_y then
+        self.y = max_y-self.h 
+    end
+end

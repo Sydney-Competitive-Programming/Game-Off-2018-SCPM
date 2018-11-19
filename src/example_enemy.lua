@@ -32,3 +32,15 @@ function Enemy:update(dt)
     local ux, uy = 0, 1 -- Unit vector to move downward
     self.move(self,ux,uy,distance)
 end
+
+function Enemy:within_boundaries(max_x,max_y)
+    if self.x < 0 
+        or (self.x+self.w) > max_x
+        or self.y < 0
+        or (self.y+self.h) > max_y
+    then
+        return false
+    else
+        return true
+    end
+end
