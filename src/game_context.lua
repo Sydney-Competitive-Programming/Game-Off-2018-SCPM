@@ -1,13 +1,15 @@
 
--- This is an entry class which encapsulate all the game components
+-- This is an entry point class which encapsulate all the game components
 -- And makes sure the entities behavior does not violate the game rules
 -- Any Interaction between the game entities should be implemented in this class
 
 Game_Context = Object:extend()
 
--- Loads all required dependencies and initiates the game componentes
+-- initiates the game componentes
 function Game_Context:new()
+    -- get the width and heights of the canvas
     max_width,max_height = love.graphics.getDimensions()
+
     -- initiate game map
     require "src/map"
     self.map =Map(EXAMPLE_ARENA_1, max_width, max_height)
@@ -40,6 +42,7 @@ end
 
 function Game_Context:update(frame_rate , key_counter)
 
+    -- Update game components
     self.Game_field:update()
 
     self.player:update(frame_rate,key_counter*frame_rate)
