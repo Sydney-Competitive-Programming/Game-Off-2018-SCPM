@@ -3,9 +3,10 @@
 
 Canvas = Object:extend()
 
-function Canvas:new()
-    self.width,self.height = love.graphics.getDimensions()
-    self.map = Map(EXAMPLE_ARENA_1, self.width, self.height)
+function Canvas:new(width,height,map)
+    self.width = width
+    self.height = height
+    self.map = map
 end
 
 

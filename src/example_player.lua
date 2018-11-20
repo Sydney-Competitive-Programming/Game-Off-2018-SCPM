@@ -6,15 +6,13 @@
 Player = Entity:extend()
 
 --constructor
-function Player:new(x,y,w,h,speed,acceleration, max_speed,canvas)
+function Player:new(x,y,w,h,speed,acceleration, max_speed)
     Player.super.new(self, x,y,w,h)
     
     -- MetaData
     self.name = "Player"
     self.image = love.graphics.newImage("graphics/enemy_example.png")
-    self.max_x = canvas.width
-    self.max_y = canvas.height
-
+    
     -- The scale between the actual width and height of the player image and 
     -- The desired dimensions of the player entity
     self.scale_w = self.w/self.image:getWidth()
@@ -61,9 +59,19 @@ function Player:update(dt,duration_since_button_clicked)
    
     Player.move(self,ux,uy,distance)
 
-    -- Ensure the player stays within the game field boundary
-    if self.x < 0 then self.x = 0 end
-    if (self.x+self.w) > self.max_x then self.x = self.max_x-self.w end
-    if self.y < 0 then self.y = 0 end
-    if (self.y+self.h) > self.max_y then self.y = self.max_y-self.h end
+end
+function Player:within_boundaries(max_x,max_y)
+    if self.x < 0 then 
+        self.x = 0 
+    end
+    if (self.x+self.w) > max_x then 
+        self.x = max_x-self.w 
+    end
+    if self.y < 0 then 
+        self.y = 0 
+    end
+    
+    if (self.y+self.h) > max_y then
+        self.y = max_y-self.h 
+    end
 end
